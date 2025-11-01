@@ -3,9 +3,6 @@ using System.Collections.Generic;
 public class Program
 {
 
-
-
-
     // subject  class to save the subject name and grades and be able to call it later when we want to add a subject 
     public class Subject
     {
@@ -18,12 +15,7 @@ public class Program
             Grade = grade;
         }
     }
-
-
-
-
-
-
+    // student class to save the student name id and subjects and be able to call it later when we want to add a student
     public class Student
     {
         public string Name { get; set; }
@@ -37,17 +29,10 @@ public class Program
             Subjects = new List<Subject>(); // empty list to hold subjects
         }
 
-
-
-
-
         public void AddSubject(Subject subject) // method to add subject to the student
         {
             Subjects.Add(subject);
         }
-
-
-
         public double CalculateAverageGrade() // method to calculate average grade
         {
             if (Subjects.Count == 0) return 0;
@@ -59,10 +44,6 @@ public class Program
             }
             return total / Subjects.Count;
         }
-
-
-
-
         public void printStudentInfo() // method to print student info
         {
             Console.WriteLine($"Student Name: {Name}, ID: {ID}");
@@ -74,10 +55,8 @@ public class Program
             Console.WriteLine($"Average Grade: {CalculateAverageGrade()}");
         }
     }
-
-
-
-
+    static List<Student> students = new List<Student>(); // list to hold all students
+    static int nextID = 1;// variable to assign unique IDs to students
     public static void Main()
     {
         //lets make the menu
@@ -100,13 +79,13 @@ public class Program
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine("add student.");
+                    AddStudent();
                     break;
                 case "2":
-                    Console.WriteLine("add grade");
+                    AddGrade();
                     break;
                 case "3":
-                    Console.WriteLine("view students.");
+                    PrintStudents();
                     break;
                 case "4":
                     exit = true;
@@ -117,4 +96,19 @@ public class Program
             }
         }
     }
+    static void AddStudent()
+    {
+        Console.Write("Enter student name: ");
+        string? name = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            Console.WriteLine("Invalid name. Student not added.");
+            return;
+        }
+
+        Student newStudent = new Student(name, nextID++);
+        students.Add(newStudent);
+        Console.WriteLine($"Student {name} added with ID {newStudent.ID}.");
+    }
+
 }
