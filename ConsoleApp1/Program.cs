@@ -3,18 +3,26 @@ using System.Collections.Generic;
 public class Program
 {
 
-    // ssubject  class to save the subject name and grades and be able to call it later when we want to add a subject 
+
+
+
+    // subject  class to save the subject name and grades and be able to call it later when we want to add a subject 
     public class Subject
     {
         public string Name { get; set; }
-        public double Grades { get; set; }
+        public double Grade { get; set; }
 
         public Subject(string name, double grade)
         {
             Name = name;
-            Grades = grade;
+            Grade = grade;
         }
     }
+
+
+
+
+
 
     public class Student
     {
@@ -29,10 +37,17 @@ public class Program
             Subjects = new List<Subject>(); // empty list to hold subjects
         }
 
+
+
+
+
         public void AddSubject(Subject subject) // method to add subject to the student
         {
             Subjects.Add(subject);
         }
+
+
+
         public double CalculateAverageGrade() // method to calculate average grade
         {
             if (Subjects.Count == 0) return 0;
@@ -40,21 +55,28 @@ public class Program
             double total = 0;
             foreach (var subject in Subjects)
             {
-                total += subject.Grades;
+                total += subject.Grade;
             }
             return total / Subjects.Count;
         }
+
+
+
+
         public void printStudentInfo() // method to print student info
         {
             Console.WriteLine($"Student Name: {Name}, ID: {ID}");
             Console.WriteLine("Subjects and Grades:");
             foreach (var subject in Subjects)
             {
-                Console.WriteLine($"- {subject.Name}: {subject.Grades}");
+                Console.WriteLine($"- {subject.Name}: {subject.Grade}");
             }
             Console.WriteLine($"Average Grade: {CalculateAverageGrade()}");
         }
     }
+
+
+
 
     public static void Main()
     {
