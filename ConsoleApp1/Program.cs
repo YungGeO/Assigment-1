@@ -3,6 +3,19 @@ using System.Collections.Generic;
 public class Program
 {
 
+    // ssubject  class to save the subject name and grades and be able to call it later when we want to add a subject 
+    public class Subject
+    {
+        public string Name { get; set; }
+        public double Grades { get; set; }
+
+        public Subject(string name, double grade)
+        {
+            Name = name;
+            Grades = grade;
+        }
+    }
+
     public static void Main()
     {
         //lets make the menu
