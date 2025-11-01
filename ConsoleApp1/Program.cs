@@ -25,13 +25,13 @@ public class Program
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine("choice 1 selected.");
+                    Console.WriteLine("add student.");
                     break;
                 case "2":
-                    Console.WriteLine("choice 2 selected.");
+                    Console.WriteLine("add grade");
                     break;
                 case "3":
-                    Console.WriteLine("choice 3 selected.");
+                    Console.WriteLine("view students.");
                     break;
                 case "4":
                     exit = true;
