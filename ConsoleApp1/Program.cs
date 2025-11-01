@@ -85,7 +85,7 @@ public class Program
                     AddGrade();
                     break;
                 case "3":
-                    PrintStudents();
+
                     break;
                 case "4":
                     exit = true;
@@ -103,12 +103,47 @@ public class Program
         if (string.IsNullOrWhiteSpace(name))
         {
             Console.WriteLine("Invalid name. Student not added.");
-            return;
+            return;//exit method early if input invalid
         }
-
+        //create new student object with the name it was given and a new unique ID
         Student newStudent = new Student(name, nextID++);
         students.Add(newStudent);
         Console.WriteLine($"Student {name} added with ID {newStudent.ID}.");
     }
+    static void AddGrade()
+    {
+        Console.Write("Enter student ID: ");
+        if (!int.TryParse(Console.ReadLine(), out int id))
+        {
+            Console.WriteLine("Invalid ID. Please enter a numeric value.");
+            return;
+        }
 
+        Student? student = students.Find(student => student.ID == id);
+
+        if (student == null)
+        {
+            Console.WriteLine("Student not found.");
+            return;
+        }
+
+        Console.Write("Enter subject name: ");
+        string? subjectName = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(subjectName))
+        {
+            Console.WriteLine("Invalid subject name.");
+            return;
+        }
+
+        Console.Write("Enter grade: ");
+        if (!double.TryParse(Console.ReadLine(), out double grade) || grade < 0 || grade > 100) //tries to parse the grade as a double , and checks if its between 0 and 100 with ors 
+        {
+            Console.WriteLine("Invalid grade. Please enter a number between 0 and 100.");
+            return;
+        }
+
+        Subject newSubject = new Subject(subjectName, grade);
+        student.AddSubject(newSubject);
+        Console.WriteLine($"Added subject {subjectName} with grade {grade} to student {student.Name}.");
+    }
 }
