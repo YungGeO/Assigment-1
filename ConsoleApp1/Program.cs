@@ -17,6 +17,14 @@ public class Program
         Console.WriteLine("Student Grade: " + studentGrade);
         Console.WriteLine("Student Average: " + studentAverage);
     }
+    //make the method that will add the student
+    public void AddStudent(string name, int id, string subject, double grade)
+    {
+        studentName = name;
+        studentID = id;
+        studentSubject = subject;
+        studentGrade = grade;
+    }
     public static void Main()
     {
 
