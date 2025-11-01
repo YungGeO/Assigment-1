@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+#nullable enable
 public class Program
 {
 
@@ -37,12 +38,12 @@ public class Program
         {
             if (Subjects.Count == 0) return 0;
 
-            double total = 0;
+            double average = 0;
             foreach (var subject in Subjects)
             {
-                total += subject.Grade;
+                average += subject.Grade;
             }
-            return total / Subjects.Count;
+            return average / Subjects.Count;
         }
         public void printStudentInfo() // method to print student info
         {
@@ -85,7 +86,7 @@ public class Program
                     AddGrade();
                     break;
                 case "3":
-
+                    PrintUsersInfo();
                     break;
                 case "4":
                     exit = true;
@@ -145,5 +146,19 @@ public class Program
         Subject newSubject = new Subject(subjectName, grade);
         student.AddSubject(newSubject);
         Console.WriteLine($"Added subject {subjectName} with grade {grade} to student {student.Name}.");
+    }
+    static void PrintUsersInfo()
+    {
+        if (students.Count == 0)
+        {
+            Console.WriteLine("No students available.");
+            return;
+        }
+
+        foreach (var student in students)
+        {
+            student.printStudentInfo();
+            Console.WriteLine(); // blank line between students
+        }
     }
 }
