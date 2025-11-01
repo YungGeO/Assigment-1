@@ -36,7 +36,7 @@ public class Program
                     break;
                 case "4":
                     exit = true;
-                    return;
+                    break;
                 default:
                     Console.WriteLine("Invalid choice. Please try again.");
                     break;
