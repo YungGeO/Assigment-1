@@ -16,6 +16,46 @@ public class Program
         }
     }
 
+    public class Student
+    {
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public List<Subject> Subjects { get; set; }
+
+        public Student(string name, int id)
+        {
+            Name = name;
+            ID = id;
+            Subjects = new List<Subject>(); // empty list to hold subjects
+        }
+
+        public void AddSubject(Subject subject) // method to add subject to the student
+        {
+            Subjects.Add(subject);
+        }
+        public double CalculateAverageGrade() // method to calculate average grade
+        {
+            if (Subjects.Count == 0) return 0;
+
+            double total = 0;
+            foreach (var subject in Subjects)
+            {
+                total += subject.Grades;
+            }
+            return total / Subjects.Count;
+        }
+        public void printStudentInfo() // method to print student info
+        {
+            Console.WriteLine($"Student Name: {Name}, ID: {ID}");
+            Console.WriteLine("Subjects and Grades:");
+            foreach (var subject in Subjects)
+            {
+                Console.WriteLine($"- {subject.Name}: {subject.Grades}");
+            }
+            Console.WriteLine($"Average Grade: {CalculateAverageGrade()}");
+        }
+    }
+
     public static void Main()
     {
         //lets make the menu
