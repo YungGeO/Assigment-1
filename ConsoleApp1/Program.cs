@@ -243,7 +243,8 @@ public class Program
             Console.WriteLine("Student not found.");
             return;
         }
-
+        students.Remove(studentToDelete);
+        Console.WriteLine($"Student {studentToDelete.Name} with ID {studentToDelete.ID} has been deleted.");
 
     }
 }
