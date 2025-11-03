@@ -228,7 +228,7 @@ public class Program
         Console.WriteLine($"Updated grade for {subjectToEdit.Name} to {newGrade}.");
 
     }
-    public void DeleteStudent()
+    static void DeleteStudent()
     {
         Console.Write("Enter student ID to delete: ");
         if (!int.TryParse(Console.ReadLine(), out int studentID))
