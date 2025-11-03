@@ -55,13 +55,14 @@ public class Program
             Console.WriteLine("Subjects and Grades:");
             foreach (var subject in Subjects)
             {
-                Console.WriteLine($"- {subject.Name}: {subject.Grade}");
+                Console.WriteLine($"-ID:{subject.SubjectID} - {subject.Name}: {subject.Grade}");
             }
             Console.WriteLine($"Average Grade: {CalculateAverageGrade()}");
         }
     }
     static List<Student> students = new List<Student>(); // list to hold all students
     static int nextID = 1;// variable to assign unique IDs to students
+    static int nextSubjectID = 1; // variable to assign unique IDs to subjects
     public static void Main()
     {
         //lets make the menu
@@ -150,7 +151,7 @@ public class Program
             return;
         }
 
-        Subject newSubject = new Subject(subjectName, grade);
+        Subject newSubject = new Subject(nextSubjectID++, subjectName, grade);
         student.AddSubject(newSubject);
         Console.WriteLine($"Added subject {subjectName} with grade {grade} to student {student.Name}.");
     }
