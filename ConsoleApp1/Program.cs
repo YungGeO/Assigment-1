@@ -164,23 +164,25 @@ public class Program
         student.AddSubject(newSubject);
         Console.WriteLine($"Added subject {subjectName} with grade {grade} to student {student.Name}.");
     }
-    static void PrintUsersInfo()
+    static bool PrintUsersInfo()
     {
         if (students.Count == 0)
         {
             Console.WriteLine("No students available.");
-            return;
+            return false; // no students to print
         }
 
         foreach (var student in students)
         {
-            student.printStudentInfo();
-            Console.WriteLine(); // blank line between students
+            student.printStudentInfo(); // calls the method inside Student
+            Console.WriteLine();
         }
+        return true; // students were printed
     }
     static void EditGrades()
     {
-        PrintUsersInfo();
+        if (!PrintUsersInfo()) return;
+        
         Console.Write("Enter student ID: ");
         if (!int.TryParse(Console.ReadLine(), out int studentID))
         {
@@ -231,7 +233,7 @@ public class Program
     }
     static void DeleteStudent()
     {
-        PrintUsersInfo();
+        if (!PrintUsersInfo()) return;
         Console.Write("Enter student ID to delete: ");
         if (!int.TryParse(Console.ReadLine(), out int studentID))
         {
