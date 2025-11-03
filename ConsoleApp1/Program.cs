@@ -78,6 +78,7 @@ public class Program
             Console.WriteLine("2. Add Subject");
             Console.WriteLine("3. View Students");
             Console.WriteLine("4. Edit student grades");
+            Console.WriteLine("5. Delete Student");
             Console.WriteLine("6. Exit");
             Console.Write("Choose an option: ");
             string? choice = Console.ReadLine();
@@ -100,6 +101,9 @@ public class Program
                     break;
                 case "4":
                     EditGrades();
+                    break;
+                case "5":
+                    DeleteStudent();
                     break;
                 case "6":
                     exit = true;
