@@ -78,6 +78,7 @@ public class Program
             Console.WriteLine("2. Add Subject");
             Console.WriteLine("3. View Students");
             Console.WriteLine("4. Edit student grades");
+            Console.WriteLine("5. Delete Student");
             Console.WriteLine("6. Exit");
             Console.Write("Choose an option: ");
             string? choice = Console.ReadLine();
@@ -100,6 +101,9 @@ public class Program
                     break;
                 case "4":
                     EditGrades();
+                    break;
+                case "5":
+                    DeleteStudent();
                     break;
                 case "6":
                     exit = true;
@@ -160,22 +164,25 @@ public class Program
         student.AddSubject(newSubject);
         Console.WriteLine($"Added subject {subjectName} with grade {grade} to student {student.Name}.");
     }
-    static void PrintUsersInfo()
+    static bool PrintUsersInfo()
     {
         if (students.Count == 0)
         {
             Console.WriteLine("No students available.");
-            return;
+            return false; // no students to print
         }
 
         foreach (var student in students)
         {
-            student.printStudentInfo();
-            Console.WriteLine(); // blank line between students
+            student.printStudentInfo(); // calls the method inside Student
+            Console.WriteLine();
         }
+        return true; // students were printed
     }
     static void EditGrades()
     {
+        if (!PrintUsersInfo()) return;
+        
         Console.Write("Enter student ID: ");
         if (!int.TryParse(Console.ReadLine(), out int studentID))
         {
@@ -222,6 +229,26 @@ public class Program
         }
         subjectToEdit.Grade = newGrade;
         Console.WriteLine($"Updated grade for {subjectToEdit.Name} to {newGrade}.");
+
+    }
+    static void DeleteStudent()
+    {
+        if (!PrintUsersInfo()) return;
+        Console.Write("Enter student ID to delete: ");
+        if (!int.TryParse(Console.ReadLine(), out int studentID))
+        {
+            Console.WriteLine("Invalid ID. Please enter a numeric value.");
+            return;
+        }
+
+        Student? studentToDelete = students.Find(s => s.ID == studentID);
+        if (studentToDelete == null)
+        {
+            Console.WriteLine("Student not found.");
+            return;
+        }
+        students.Remove(studentToDelete);
+        Console.WriteLine($"Student {studentToDelete.Name} with ID {studentToDelete.ID} has been deleted.");
 
     }
 }
