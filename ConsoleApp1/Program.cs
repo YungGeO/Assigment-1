@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http.Headers;
 #nullable enable
 public class Program
 {
@@ -7,11 +8,14 @@ public class Program
     // subject  class to save the subject name and grades and be able to call it later when we want to add a subject 
     public class Subject
     {
+        public int SubjectID { get; set; }
         public string Name { get; set; }
+
         public double Grade { get; set; }
 
-        public Subject(string name, double grade)
+        public Subject(int subjectID, string name, double grade)
         {
+            SubjectID = subjectID;
             Name = name;
             Grade = grade;
         }
@@ -88,6 +92,9 @@ public class Program
                 case "3":
                     PrintUsersInfo();
                     break;
+                case "4":
+                    EditGrades();
+                    break;
                 case "6":
                     exit = true;
                     break;
@@ -160,5 +167,9 @@ public class Program
             student.printStudentInfo();
             Console.WriteLine(); // blank line between students
         }
+    }
+    static void EditGrades()
+    {
+
     }
 }
