@@ -202,6 +202,26 @@ public class Program
         {
             Console.WriteLine($"ID: {subject.ID} - {subject.Name}: {subject.Grade}");
         }
+        Console.Write("Enter subject ID to edit: ");
+        if (!int.TryParse(Console.ReadLine(), out int subjectID))
+        {
+            Console.WriteLine("Invalid subject ID. Please enter a numeric value.");
+            return;
+        }
+        Subject? subjectToEdit = student.Subjects.Find(sub => sub.ID == subjectID);
+        if (subjectToEdit == null)
+        {
+            Console.WriteLine("Subject not found.");
+            return;
+        }
+        Console.Write("Enter new grade: ");
+        if (!double.TryParse(Console.ReadLine(), out double newGrade) || newGrade < 0 || newGrade > 100)
+        {
+            Console.WriteLine("Invalid grade. Please enter a number between 0 and 100.");
+            return;
+        }
+        subjectToEdit.Grade = newGrade;
+        Console.WriteLine($"Updated grade for {subjectToEdit.Name} to {newGrade}.");
 
     }
 }
