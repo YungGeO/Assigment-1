@@ -89,6 +89,12 @@ public class Program
                     PrintUsersInfo();
                     break;
                 case "4":
+                    EditGrade();
+                    break;
+                case "5":
+                    DeleteStudent();
+                    break;
+                case "6":
                     exit = true;
                     break;
                 default:
