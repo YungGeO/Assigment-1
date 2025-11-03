@@ -4,24 +4,28 @@ using System.Net.Http.Headers;
 #nullable enable
 public class Program
 {
-
-    // subject  class to save the subject name and grades and be able to call it later when we want to add a subject 
-    public class Subject
+    public interface IEntity
     {
-        public int SubjectID { get; set; }
+        int ID { get; set; }
+        string Name { get; set; }
+    }
+    // subject  class to save the subject name and grades and be able to call it later when we want to add a subject 
+    public class Subject : IEntity
+    {
+        public int ID { get; set; }
         public string Name { get; set; }
 
         public double Grade { get; set; }
 
         public Subject(int subjectID, string name, double grade)
         {
-            SubjectID = subjectID;
+            ID = subjectID;
             Name = name;
             Grade = grade;
         }
     }
     // student class to save the student name id and subjects and be able to call it later when we want to add a student
-    public class Student
+    public class Student : IEntity
     {
         public string Name { get; set; }
         public int ID { get; set; }
@@ -55,7 +59,7 @@ public class Program
             Console.WriteLine("Subjects and Grades:");
             foreach (var subject in Subjects)
             {
-                Console.WriteLine($"-ID:{subject.SubjectID} - {subject.Name}: {subject.Grade}");
+                Console.WriteLine($"-ID:{subject.ID} - {subject.Name}: {subject.Grade}");
             }
             Console.WriteLine($"Average Grade: {CalculateAverageGrade()}");
         }
@@ -73,7 +77,8 @@ public class Program
             Console.WriteLine("1. Add Student");
             Console.WriteLine("2. Add Subject");
             Console.WriteLine("3. View Students");
-            Console.WriteLine("4. Exit");
+            Console.WriteLine("4. Edit student grades");
+            Console.WriteLine("6. Exit");
             Console.Write("Choose an option: ");
             string? choice = Console.ReadLine();
             if (choice == null)
@@ -171,6 +176,32 @@ public class Program
     }
     static void EditGrades()
     {
+        Console.Write("Enter student ID: ");
+        if (!int.TryParse(Console.ReadLine(), out int studentID))
+        {
+            Console.WriteLine("Invalid ID. Please enter a numeric value.");
+            return;
+        }
+
+        Student? student = students.Find(s => s.ID == studentID);
+        if (student == null)
+        {
+            Console.WriteLine("Student not found.");
+            return;
+        }
+
+        if (student.Subjects.Count == 0)
+        {
+            Console.WriteLine("This student has no subjects to edit.");
+            return;
+        }
+
+        // List the subjects for this student
+        Console.WriteLine($"Subjects for {student.Name}:");
+        foreach (var subject in student.Subjects)
+        {
+            Console.WriteLine($"ID: {subject.ID} - {subject.Name}: {subject.Grade}");
+        }
 
     }
 }
