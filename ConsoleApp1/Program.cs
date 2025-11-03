@@ -228,4 +228,22 @@ public class Program
         Console.WriteLine($"Updated grade for {subjectToEdit.Name} to {newGrade}.");
 
     }
+    public void DeleteStudent()
+    {
+        Console.Write("Enter student ID to delete: ");
+        if (!int.TryParse(Console.ReadLine(), out int studentID))
+        {
+            Console.WriteLine("Invalid ID. Please enter a numeric value.");
+            return;
+        }
+
+        Student? studentToDelete = students.Find(s => s.ID == studentID);
+        if (studentToDelete == null)
+        {
+            Console.WriteLine("Student not found.");
+            return;
+        }
+
+
+    }
 }
