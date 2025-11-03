@@ -180,6 +180,7 @@ public class Program
     }
     static void EditGrades()
     {
+        PrintUsersInfo();
         Console.Write("Enter student ID: ");
         if (!int.TryParse(Console.ReadLine(), out int studentID))
         {
@@ -230,6 +231,7 @@ public class Program
     }
     static void DeleteStudent()
     {
+        PrintUsersInfo();
         Console.Write("Enter student ID to delete: ");
         if (!int.TryParse(Console.ReadLine(), out int studentID))
         {
